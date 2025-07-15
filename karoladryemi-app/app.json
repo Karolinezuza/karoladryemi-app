@@ -3,7 +3,6 @@
     "name": "karoladryemi-app",
     "slug": "karoladryemi-app",
     "version": "1.0.0",
-    "scheme": "your-app-scheme",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -24,10 +23,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-        "bundler": "metro"
-    },
-    "plugins": [
-      "expo-router"
-    ]
+      "favicon": "./assets/favicon.png"
+    }
   }
 }
