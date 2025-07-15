@@ -31,5 +31,6 @@ export default function App() {
         <Stack.Screen name="AjudaSuporte" component={AjudaSuporte} />
       </Stack.Navigator>
     </NavigationContainer>
+    
   );
 }
