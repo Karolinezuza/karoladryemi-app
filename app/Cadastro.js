@@ -1,10 +1,24 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useRouter } from 'expo-router';
 
-export default function LoginScreen({ navigation }) {
-  const router = useRouter();
+export default function CadastroScreen({ navigation }) {
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  function handleCadastrar() {
+    if (!nome || !cpf || !telefone || !email || !senha) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+      return;
+    }
+
+    Alert.alert('Sucesso', 'Cadastro realizado com sucesso!', [
+      { text: 'OK', onPress: () => navigation.goBack() },
+    ]);
+  }
 
   return (
     <View style={styles.container}>
@@ -21,21 +35,21 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.subtitle}>Agência de turismo</Text>
       </View>
 
-      <Text style={styles.title}>Acesse sua conta</Text>
+      <Text style={styles.title}>Cadastre-se</Text>
 
-      <TextInput placeholder="E-mail" placeholderTextColor="#000" style={styles.input} />
-      <TextInput placeholder="Senha" placeholderTextColor="#000" secureTextEntry style={styles.input} />
+      <TextInput placeholder="Nome" placeholderTextColor="#000" style={styles.input} value={nome} onChangeText={setNome} />
+      <TextInput placeholder="CPF" placeholderTextColor="#000" style={styles.input} value={cpf} onChangeText={setCpf} keyboardType="numeric" />
+      <TextInput placeholder="Telefone" placeholderTextColor="#000" style={styles.input} value={telefone} onChangeText={setTelefone} keyboardType="phone-pad" />
+      <TextInput placeholder="E-mail" placeholderTextColor="#000" style={styles.input} value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
+      <TextInput placeholder="Senha" placeholderTextColor="#000" style={styles.input} value={senha} onChangeText={setSenha} secureTextEntry />
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Entrar</Text>
+      <TouchableOpacity style={styles.button} onPress={handleCadastrar}>
+        <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
 
-      <Text style={styles.forgot}>Esqueceu a senha?</Text>
-
-      <TouchableOpacity onPress={() => router.navigate('/Cadastro')}>
-  <Text style={styles.register}>Não possui cadastro?</Text>
-</TouchableOpacity>
-
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text style={styles.register}>Voltar para o login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -97,26 +111,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  coqueiroTop: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    width: 200,
-    height: 200,
-  },
-  coqueiroBottom: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: 180,
-    height: 180,
-    zIndex: 1,
-  },
-  forgot: {
-    color: '#6c63ff',
-    fontSize: 14,
-    marginBottom: 4,
-  },
   register: {
     color: '#6c63ff',
     fontWeight: 'bold',
@@ -139,5 +133,20 @@ const styles = StyleSheet.create({
     height: 26,
     resizeMode: 'contain',
     zIndex: 10,
+  },
+  coqueiroTop: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 200,
+    height: 200,
+  },
+  coqueiroBottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: 180,
+    height: 180,
+    zIndex: 1,
   },
 });
