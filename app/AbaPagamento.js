@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function ResumoViagemScreen() {
+  const router = useRouter();
+
   return (
     <View
       style={{
@@ -18,7 +21,7 @@ export default function ResumoViagemScreen() {
         Resumo da Viagem
       </Text>
 
-      <TouchableOpacity
+      <TouchableOpacity  onPress={() => router.navigate('/Pagamento')}
         style={{
           backgroundColor: '#7CC37C', // Verde do botão da imagem
           paddingVertical: 15,

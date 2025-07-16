@@ -13,8 +13,7 @@ export default function LoginScreen({ navigation }) {
       <Image source={require('../assets/avião.img(1).png')} style={styles.image} />
       <Image source={require('../assets/coqueiro.png')} style={styles.coqueiroTop} />
       <Image source={require('../assets/coqueiro2.png')} style={styles.coqueiroBottom} />
-      <Image source={require('../assets/Icon.png')} style={styles.iconLeft} />
-      <Image source={require('../assets/home-05.png')} style={styles.iconRight} />
+
 
       <View style={styles.header}>
         <Text style={styles.logo}>Explorar Tour</Text>
@@ -26,11 +25,15 @@ export default function LoginScreen({ navigation }) {
       <TextInput placeholder="E-mail" placeholderTextColor="#000" style={styles.input} />
       <TextInput placeholder="Senha" placeholderTextColor="#000" secureTextEntry style={styles.input} />
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Entrar</Text>
+      <TouchableOpacity style={styles.button} onPress={() => router.navigate('/PacotesPrincipal')}>
+          <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 
-      <Text style={styles.forgot}>Esqueceu a senha?</Text>
+
+        <TouchableOpacity onPress={() => router.navigate('/Esqueceusenha')}>
+           <Text style={styles.forgot}>Esqueceu a senha?</Text>
+        </TouchableOpacity>
+
 
       <TouchableOpacity onPress={() => router.navigate('/Cadastro')}>
   <Text style={styles.register}>Não possui cadastro?</Text>
@@ -122,22 +125,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
   },
-  iconLeft: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
-    width: 26,
-    height: 26,
-    resizeMode: 'contain',
-    zIndex: 10,
-  },
-  iconRight: {
-    position: 'absolute',
-    top: 20,
-    right: 290,
-    width: 30,
-    height: 26,
-    resizeMode: 'contain',
-    zIndex: 10,
-  },
+  
 });

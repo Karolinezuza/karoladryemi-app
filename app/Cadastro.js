@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { useRouter } from 'expo-router';
+import Pagamento from './Pagamento';
 
-export default function CadastroScreen({ navigation }) {
+export default function CadastroScreen({ }) {
+
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+  const router = useRouter();
 
   function handleCadastrar() {
     if (!nome || !cpf || !telefone || !email || !senha) {
@@ -16,19 +21,29 @@ export default function CadastroScreen({ navigation }) {
     }
 
     Alert.alert('Sucesso', 'Cadastro realizado com sucesso!', [
-      { text: 'OK', onPress: () => navigation.goBack() },
+      { text: 'OK', onPress: () => router.navigate("/") },
     ]);
   }
 
   return (
+
     <View style={styles.container}>
       <StatusBar style="auto" />
 
       <Image source={require('../assets/avião.img(1).png')} style={styles.image} />
       <Image source={require('../assets/coqueiro.png')} style={styles.coqueiroTop} />
       <Image source={require('../assets/coqueiro2.png')} style={styles.coqueiroBottom} />
-      <Image source={require('../assets/Icon.png')} style={styles.iconLeft} />
-      <Image source={require('../assets/home-05.png')} style={styles.iconRight} />
+
+      {/* Ícones lado a lado */}
+      <View style={styles.iconRow}>
+        <Pressable onPress={() => router.back()}>
+          <Image source={require('../assets/Icon.png')} style={styles.iconLeft} />
+        </Pressable>
+        <Pressable onPress={() => router.navigate('/PacotesPrincipal')}>
+        <Image source={require('../assets/home-05.png')} style={styles.iconRight} />
+        </Pressable>
+
+      </View>
 
       <View style={styles.header}>
         <Text style={styles.logo}>Explorar Tour</Text>
@@ -43,13 +58,11 @@ export default function CadastroScreen({ navigation }) {
       <TextInput placeholder="E-mail" placeholderTextColor="#000" style={styles.input} value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
       <TextInput placeholder="Senha" placeholderTextColor="#000" style={styles.input} value={senha} onChangeText={setSenha} secureTextEntry />
 
+      <TouchableOpacity onPress={() => router.navigate('/')}></TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleCadastrar}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.register}>Voltar para o login</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -67,7 +80,7 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: 'contain',
     marginBottom: 8,
-    marginTop: -120,
+    marginTop: -70,
   },
   header: {
     alignItems: 'center',
@@ -117,22 +130,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   iconLeft: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
     width: 26,
     height: 26,
-    resizeMode: 'contain',
-    zIndex: 10,
+    marginRight: 12,
   },
   iconRight: {
-    position: 'absolute',
-    top: 20,
-    right: 290,
     width: 30,
     height: 26,
-    resizeMode: 'contain',
-    zIndex: 10,
+  },
+  iconRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    //zIndex: 20,
   },
   coqueiroTop: {
     position: 'absolute',

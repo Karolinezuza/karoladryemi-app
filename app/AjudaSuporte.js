@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, StatusBar, Image, TextInput, Alert,} 
-from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Image, Alert,}
+  
+  from 'react-native';
 import { useRouter } from 'expo-router';
 
-export default function AvaliacaoComentario() {
+export default function Ajuda() {
   const router = useRouter();
-  const [comentario, setComentario] = useState('');
+  const [mensagem, setMensagem] = useState('');
 
-  const enviarFeedback = () => {
-    Alert.alert('Obrigada pela atenção!', 'Seu feedback foi enviado com sucesso.');
-    setComentario('');
+  const enviarAssistencia = () => {
+    Alert.alert('Mensagem enviada!', 'Nossa equipe entrará em contato pelo seu e-mail.');
+    setMensagem('');
   };
 
   return (
@@ -26,27 +27,21 @@ export default function AvaliacaoComentario() {
         </TouchableOpacity>
       </View>
 
+      <Text style={styles.title}>Precisa de ajuda?</Text>
 
-      <Text style={styles.sectionTitle}>Avaliação</Text>
-      <View style={styles.ratingBox}>
-        <Text style={styles.stars}>⭐ ⭐ ⭐ ☆ ☆</Text>
-      </View>
-
-
-      <Text style={styles.sectionTitle}>Comentário</Text>
       <TextInput
-        style={styles.commentBox}
-        placeholder="Deixe sua opinião sobre nossa empresa:"
+        style={styles.textArea}
+        placeholder="Como posso te ajudar?"
         placeholderTextColor="#555"
-        value={comentario}
-        onChangeText={setComentario}
+        value={mensagem}
+        onChangeText={setMensagem}
         multiline
       />
 
- 
-      <TouchableOpacity style={styles.button} onPress={enviarFeedback}>
-        <Text style={styles.buttonText}>Enviar feedback</Text>
+      <TouchableOpacity style={styles.button} onPress={enviarAssistencia}>
+        <Text style={styles.buttonText}>Envie para a assistência</Text>
       </TouchableOpacity>
+
     </View>
   );
 }
@@ -68,42 +63,38 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  sectionTitle: {
-    fontSize: 22,
+  title: {
+    fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  ratingBox: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
+    textAlign: 'center',
     marginBottom: 30,
-    borderWidth: 1,
-    borderColor: '#000',
-    alignItems: 'center',
   },
-  stars: {
-    fontSize: 28,
-  },
-  commentBox: {
+  textArea: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 15,
     borderWidth: 1,
     borderColor: '#000',
-    marginBottom: 30,
-    minHeight: 100,
+    padding: 15,
+    fontSize: 16,
+    height: 120,
     textAlignVertical: 'top',
+    marginBottom: 40,
   },
   button: {
     backgroundColor: '#4CAF50',
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
+  },
+  info: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#444',
   },
 });
