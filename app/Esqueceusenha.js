@@ -30,6 +30,7 @@ export default function EsqueceuSenha() {
       <TouchableOpacity style={styles.sendButton} onPress={enviarCodigo}>
         <Text style={styles.buttonText}>Enviar Código</Text>
       </TouchableOpacity>
+      
 
       {/* Mensagem de Sucesso */}
       {mensagemSucesso !== '' && (
