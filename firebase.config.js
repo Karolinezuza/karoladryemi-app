@@ -9,19 +9,22 @@ import { getAuth } from 'firebase/auth';
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: 'api-key',
-  authDomain: 'project-id.firebaseapp.com',
-  databaseURL: 'https://project-id.firebaseio.com',
-  projectId: 'project-id',
-  storageBucket: 'project-id.appspot.com',
-  messagingSenderId: 'sender-id',
-  appId: 'app-id',
-  measurementId: 'G-measurement-id',
-};
-const auth = getAuth(app);
 
-export
- { auth }
+  apiKey: "AIzaSyBuLpMWLOToVKQIxRXCPtM4ZXD3VnzSV3w",
+  authDomain: "explorar-tour.firebaseapp.com",
+  projectId: "explorar-tour",
+  storageBucket: "explorar-tour.firebasestorage.app",
+  messagingSenderId: "523937342831",
+  appId: "1:523937342831:web:1901c50e39b93d0b60749a"
+};
+
+
+
+
 const app = initializeApp(firebaseConfig);
 // For more information on how to access Firebase in your project,
 // see the Firebase documentation: https://firebase.google.com/docs/web/setup#access-firebase
+
+const auth = getAuth(app);
+
+export { auth }
