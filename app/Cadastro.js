@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
+import { auth } from '../firebase.config';
+import { createUserWithEmailAndPassword} from "firebase/auth";
 import Pagamento from './Pagamento';
 
 export default function CadastroScreen({ }) {
@@ -14,15 +16,19 @@ export default function CadastroScreen({ }) {
 
   const router = useRouter();
 
-  function handleCadastrar() {
-    if (!nome || !cpf || !telefone || !email || !senha) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
-      return;
-    }
-
-    Alert.alert('Sucesso', 'Cadastro realizado com sucesso!', [
-      { text: 'OK', onPress: () => router.navigate("/") },
-    ]);
+  const createUser = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      // Signed up 
+      const user = userCredential.user;
+      router.navigate('/')
+      console.log(user);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode);
+      console.error(errorMessage);
+    }    
   }
 
   return (
@@ -59,7 +65,7 @@ export default function CadastroScreen({ }) {
       <TextInput placeholder="Senha" placeholderTextColor="#000" style={styles.input} value={senha} onChangeText={setSenha} secureTextEntry />
 
       <TouchableOpacity onPress={() => router.navigate('/')}></TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleCadastrar}>
+      <TouchableOpacity style={styles.button} onPress={createUser}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
 
