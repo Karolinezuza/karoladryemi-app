@@ -2,9 +2,31 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
+import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from 'react';
 
 export default function LoginScreen({ navigation }) {
   const router = useRouter();
+
+  const [email, setEmail] = useState('aar1@aluno.ifal.edu.br')
+  const [senha, setSenha] = useState('ake@887')
+
+  const handleLogin = async () => {
+  
+    
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+      // Signed up 
+      const user = userCredential.user;
+      console.log(user);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode);
+      console.error(errorMessage);
+    }    
+  }
 
   return (
     <View style={styles.container}>
@@ -25,7 +47,7 @@ export default function LoginScreen({ navigation }) {
       <TextInput placeholder="E-mail" placeholderTextColor="#000" style={styles.input} />
       <TextInput placeholder="Senha" placeholderTextColor="#000" secureTextEntry style={styles.input} />
 
-      <TouchableOpacity style={styles.button} onPress={() => router.navigate('/PacotesPrincipal')}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 

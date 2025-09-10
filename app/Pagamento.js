@@ -1,10 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+import { signOut } from "firebase/auth";
+import { auth } from '../firebaseConfig';
 
 export default function Pagamento() {
   const router = useRouter();
 
+  const handleSair = async () => {
+    try {
+      await signOut(auth);
+      router.replace('/');
+    } catch (error) {
+      console.error(error.code);
+      console.error(error.message);
+    }
+  }
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -31,6 +42,11 @@ export default function Pagamento() {
       {/* Botão Comprar */}
       <TouchableOpacity style={styles.button} onPress={() => router.navigate('/AvaliacaoComentario')}>
         <Text style={styles.buttonText}>COMPRAR</Text>
+      </TouchableOpacity>
+
+
+      <TouchableOpacity style={styles.button} onPress={handleSair}>
+        <Text style={styles.buttonText}>SAIR</Text>
       </TouchableOpacity>
     </View>
   );
