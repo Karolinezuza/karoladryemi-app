@@ -13,7 +13,7 @@ export default function LoginScreen({ navigation }) {
   const [senha, setSenha] = useState('ake@887')
 
   const handleLogin = async () => {
-  
+  // teste
     
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, senha);
