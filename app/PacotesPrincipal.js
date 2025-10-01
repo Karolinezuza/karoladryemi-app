@@ -1,22 +1,20 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 
 export default function PacotesPrincipal() {
-  const navigation = useNavigation();
   const router = useRouter();
 
   return (
     <View style={styles.container}>
 
-      <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+      
+      <TouchableOpacity onPress={() => router.push('/')} style={styles.backButton}>
         <Image source={require('../assets/Icon.png')} style={styles.backIcon} />
       </TouchableOpacity>
 
       <Text style={styles.title}>Pacotes Principal</Text>
 
-      {/* Botões Pacotes */}
       <TouchableOpacity
         style={styles.pacoteButton}
         onPress={() => router.navigate('DetalhesPacote')}
@@ -38,7 +36,7 @@ export default function PacotesPrincipal() {
         <Text style={styles.buttonText}>Pacote</Text>
       </TouchableOpacity>
 
-      {/* Botão Personalizar Viagens */}
+ 
       <TouchableOpacity
         style={styles.personalizarButton}
         onPress={() => router.navigate('PersonalizacaoPacotes')}

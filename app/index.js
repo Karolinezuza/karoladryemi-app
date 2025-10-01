@@ -18,6 +18,7 @@ export default function LoginScreen({ navigation }) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, senha);
       // Signed up 
+      router.replace('/PacotesPrincipal');
       const user = userCredential.user;
       console.log(user);
     } catch (error) {
